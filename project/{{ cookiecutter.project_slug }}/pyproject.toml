@@ -1,0 +1,86 @@
+[tool.poetry]
+name = "{{ cookiecutter.project_slug }}"
+version = "0.1.0"
+description = ""
+authors = []
+readme = "README.md"
+packages = [{include = "lib"}]
+
+[tool.poetry.dependencies]
+python = "^{{ cookiecutter.python_version }}"
+
+{% if cookiecutter.use_poetry -%}
+[tool.poetry.group.test.dependencies]
+pytest = "*"
+
+[tool.poetry.group.lint.dependencies]
+flake8 = "*"
+isort = "*"
+nbqa = "*"
+{% if cookiecutter.use_black -%}
+black = "*"
+{%- endif %}
+
+[tool.poetry.group.dev.dependencies]
+jupyter = "*"
+{%- else -%}
+pytest = "*"
+flake8 = "*"
+isort = "*"
+jupyter = "*"
+nbqa = "*"
+{% if cookiecutter.use_black -%}
+black = "*"
+{%- endif %}
+{%- endif %}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+combine_as_imports = true
+profile = "black"
+known_first_party = ["lib", "tests"]
+skip = [
+    ".git",
+    ".vscode",
+    ".idea",
+    "__pycache__",
+    ".ipynb_checkpoints",
+    "stripped",
+    "venv",
+    ".venv",
+    "dist",
+    ".hooks",
+]
+
+[tool.pytest.ini_options]
+addopts = "--doctest-modules"
+testpaths = [
+    "lib",
+    "tests",
+]
+
+{% if cookiecutter.use_black -%}
+[tool.black]
+line-length = 120
+
+force-exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | venv
+  | .venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | stripped
+  | data
+  | .hooks
+)/
+'''
+{%- endif %}
