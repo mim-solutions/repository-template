@@ -1,0 +1,18 @@
+[flake8]
+max-line-length = 120
+# W503: we prefer line breaks _before_ operators (as changed in PEP8 in 2016).
+{% if cookiecutter.use_black -%}# E203: whitespace before : , black is right here: https://github.com/psf/black/issues/315{%- endif %}
+ignore = W503{% if cookiecutter.use_black -%},E203{%- endif %}
+show-source = True
+statistics = True
+exclude =
+    .git
+    .vscode
+    .idea
+    __pycache__
+    .ipynb_checkpoints
+    stripped
+    venv
+    .venv
+    dist
+    .hooks
