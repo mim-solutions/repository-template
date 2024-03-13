@@ -24,5 +24,5 @@ More details on cookiecutter at https://cookiecutter.readthedocs.io/.
 To test a template during development, with this repository cloned locally, pass a path as in the example:
 
 ```bash
-cookiecutter /path/to/this/repo/project
+cookiecutter /path/to/this/repo
 ```
