@@ -23,6 +23,6 @@ jobs:
     - name: Build project
       run: cookiecutter . -o project_black --no-input use_black=true  # TODO build multiple projects at once?
     - name: Example test
-      run:
-        - cd project_black/project
-        - .ci/test.sh
+      run: |
+        cd project_black/project
+        .ci/test.sh
