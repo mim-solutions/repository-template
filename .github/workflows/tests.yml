@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Setup Pyhon
+    - name: Setup Python
       uses: actions/setup-python@v5
       with:
         python-version: "3.10"
@@ -26,4 +26,5 @@ jobs:
     - name: Example test
       run: |
         cd project_black/project
-        .ci/test.sh
+        ls -la .ci
+        sh .ci/test.sh
