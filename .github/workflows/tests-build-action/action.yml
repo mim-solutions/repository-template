@@ -11,3 +11,6 @@ runs:
   - name: Install cookiecutter
     run: pip install cookiecutter
     shell: bash
+  - name: Build project
+    run: cookiecutter . -o project_black --no-input use_black=true  # TODO build multiple projects at once?
+    shell: bash
