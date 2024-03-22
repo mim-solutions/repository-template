@@ -20,13 +20,6 @@ jobs:
     - uses: actions/checkout@v4
     - uses: ./.github/workflows/tests-build-action
 
-    - name: debug
-      run: |
-        ls -la .ci
-        ls -la .hooks
-        chmod +x .hooks/*
-        ls -la .hooks
-
     - name: Test
       run: .ci/test.sh
 
