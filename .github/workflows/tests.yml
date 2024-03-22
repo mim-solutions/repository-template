@@ -10,13 +10,73 @@ permissions:
   contents: read
 
 jobs:
-  test:
-    name: Example test
+  default:
+    name: Test default config
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     - uses: ./.github/workflows/tests-build-action
-    - name: Example test
-      run: |
-        cd project_black/project
-        sh .ci/test.sh
+    - run: cd project_default/project
+
+    - name: Test
+      run: sh .ci/test.sh
+
+    - name: Stripped notebooks check
+      run: sh .ci/stripped_notebooks_check.sh
+
+    - name: isort
+      run: sh .ci/isort.sh
+
+    - name: Flake8
+      run: sh .ci/flake8.sh
+
+  black:
+    name: Test config with black
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/workflows/tests-build-action
+      - run: cd project_black/project
+
+      - name: Test
+        run: sh .ci/test.sh
+
+      - name: Stripped notebooks check
+        run: sh .ci/stripped_notebooks_check.sh
+
+      - name: isort
+        run: sh .ci/isort.sh
+
+      - name: Flake8
+        run: sh .ci/flake8.sh
+
+      - name: Black
+        run: |
+          pip install black
+          black .
+
+  poetry:
+    name: Test config with poetry and black
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/workflows/tests-build-action
+      - run: cd project_poetry/project
+      - run: pip install poetry
+
+      - name: Test
+        run: sh .ci/test.sh
+
+      - name: Stripped notebooks check
+        run: sh .ci/stripped_notebooks_check.sh
+
+      - name: isort
+        run: sh .ci/isort.sh
+
+      - name: Flake8
+        run: sh .ci/flake8.sh
+
+      - name: Black
+        run: |
+          poetry install --only lint
+          poetry run black .
