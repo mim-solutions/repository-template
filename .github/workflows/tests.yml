@@ -28,17 +28,8 @@ jobs:
     - uses: actions/checkout@v4
     - uses: ./.github/workflows/setup-test-job
 
-    - name: Test
-      run: .ci/test.sh
-
-    - name: Stripped notebooks check
-      run: .ci/stripped_notebooks_check.sh
-
-    - name: isort
-      run: .ci/isort.sh
-
-    - name: Flake8
-      run: .ci/flake8.sh
+    - name: Basic tests
+      uses: ./.github/workflows/basic-tests
 
   black:
     name: Test config with black
@@ -51,17 +42,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/workflows/setup-test-job
 
-      - name: Test
-        run: .ci/test.sh
-
-      - name: Stripped notebooks check
-        run: .ci/stripped_notebooks_check.sh
-
-      - name: isort
-        run: .ci/isort.sh
-
-      - name: Flake8
-        run: .ci/flake8.sh
+      - name: Basic tests
+        uses: ./.github/workflows/basic-tests
 
       - name: Black
         run: |
@@ -81,17 +63,8 @@ jobs:
       - name: Install poetry
         run: pip install poetry
 
-      - name: Test
-        run: .ci/test.sh
-
-      - name: Stripped notebooks check
-        run: .ci/stripped_notebooks_check.sh
-
-      - name: isort
-        run: .ci/isort.sh
-
-      - name: Flake8
-        run: .ci/flake8.sh
+      - name: Basic tests
+        uses: ./.github/workflows/basic-tests
 
       - name: Black
         run: |

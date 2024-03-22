@@ -1,0 +1,21 @@
+name: Basic tests
+description: Tests including running unit tests, stripped notebooks check, isort and Flake8
+
+runs:
+  using: "composite"
+  steps:
+    - name: Test
+      run: .ci/test.sh
+      shell: bash
+
+    - name: Stripped notebooks check
+      run: .ci/stripped_notebooks_check.sh
+      shell: bash
+
+    - name: isort
+      run: .ci/isort.sh
+      shell: bash
+
+    - name: Flake8
+      run: .ci/flake8.sh
+      shell: bash
