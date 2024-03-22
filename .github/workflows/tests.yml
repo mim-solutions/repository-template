@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: mim-solutions/repository-template@v1
+    - uses: ./.github/workflows/tests-build-action
     - name: Build project
       run: cookiecutter . -o project_black --no-input use_black=true  # TODO build multiple projects at once?
     - name: Example test
