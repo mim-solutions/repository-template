@@ -13,18 +13,12 @@ jobs:
   default:
     name: Test default config
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./project_default/project
     steps:
     - uses: actions/checkout@v4
     - uses: ./.github/workflows/tests-build-action
-    - run: cd project_default/project
-
-    - name: debug
-      run: |
-        pwd
-        ls -la .
-        ls -la .ci
-        chmod +x .ci/*
-        ls -la .ci
 
     - name: Test
       run: sh .ci/test.sh
@@ -41,10 +35,12 @@ jobs:
   black:
     name: Test config with black
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./project_black/project
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/workflows/tests-build-action
-      - run: cd project_black/project
 
       - name: Test
         run: sh .ci/test.sh
@@ -66,11 +62,14 @@ jobs:
   poetry:
     name: Test config with poetry and black
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./project_poetry/project
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/workflows/tests-build-action
-      - run: cd project_poetry/project
-      - run: pip install poetry
+      - name: Install poetry
+        run: pip install poetry
 
       - name: Test
         run: sh .ci/test.sh
