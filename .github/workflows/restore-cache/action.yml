@@ -1,0 +1,19 @@
+name: Restore cache
+description: Restore cached Python files and built projects
+
+runs:
+  using: "composite"
+  steps:
+    - name: Restore Python
+      uses: actions/cache@v3
+      with:
+        path: ${{ env.pythonLocation }}
+        key: cache-${{ github.sha }}
+    - name: Restore projects
+      uses: actions/cache@v3
+      with:
+        path: |
+          project_default
+          project_black
+          project_poetry
+        key: cache-${{ github.sha }}

@@ -26,6 +26,7 @@ jobs:
         working-directory: ./project_default/project
     steps:
     - uses: actions/checkout@v4
+    - uses: ./.github/workflows/restore-cache
 
     - name: Test
       run: .ci/test.sh
@@ -48,6 +49,7 @@ jobs:
         working-directory: ./project_black/project
     steps:
       - uses: actions/checkout@v4
+      - uses: ./.github/workflows/restore-cache
 
       - name: Test
         run: .ci/test.sh
@@ -75,6 +77,7 @@ jobs:
         working-directory: ./project_poetry/project
     steps:
       - uses: actions/checkout@v4
+      - uses: ./.github/workflows/restore-cache
       - name: Install poetry
         run: pip install poetry
 

@@ -8,7 +8,7 @@ runs:
     uses: actions/setup-python@v5
     with:
       python-version: "3.10"
-      cache: "pip"  # TODO remove?
+#      cache: "pip"  # TODO remove?
   - name: Install cookiecutter
     run: pip install cookiecutter
     shell: bash
@@ -23,6 +23,11 @@ runs:
     run: cookiecutter . -o project_poetry --no-input use_poetry=true use_black=true
     shell: bash
 
+  - name: Cache Python
+    uses: actions/cache@v3
+    with:
+      path: ${{ env.pythonLocation }}
+      key: cache-${{ github.sha }}
   - name: Cache projects
     uses: actions/cache@v3
     with:
