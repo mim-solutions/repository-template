@@ -20,3 +20,12 @@ runs:
   - name: Build `project_poetry`
     run: cookiecutter . -o project_poetry --no-input use_poetry=true use_black=true
     shell: bash
+
+  - name: debug
+    run: |
+      cd project_default/project
+      ls -la .ci
+      ls -la .hooks
+      chmod +x .hooks/*
+      ls -la .hooks
+    shell: bash
