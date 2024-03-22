@@ -28,16 +28,16 @@ jobs:
         ls -la .hooks
 
     - name: Test
-      run: sh .ci/test.sh
+      run: .ci/test.sh
 
     - name: Stripped notebooks check
-      run: sh .ci/stripped_notebooks_check.sh
+      run: .ci/stripped_notebooks_check.sh
 
     - name: isort
-      run: sh .ci/isort.sh
+      run: .ci/isort.sh
 
     - name: Flake8
-      run: sh .ci/flake8.sh
+      run: .ci/flake8.sh
 
   black:
     name: Test config with black
@@ -50,16 +50,16 @@ jobs:
       - uses: ./.github/workflows/tests-build-action
 
       - name: Test
-        run: sh .ci/test.sh
+        run: .ci/test.sh
 
       - name: Stripped notebooks check
-        run: sh .ci/stripped_notebooks_check.sh
+        run: .ci/stripped_notebooks_check.sh
 
       - name: isort
-        run: sh .ci/isort.sh
+        run: .ci/isort.sh
 
       - name: Flake8
-        run: sh .ci/flake8.sh
+        run: .ci/flake8.sh
 
       - name: Black
         run: |
@@ -79,16 +79,16 @@ jobs:
         run: pip install poetry
 
       - name: Test
-        run: sh .ci/test.sh
+        run: .ci/test.sh
 
       - name: Stripped notebooks check
-        run: sh .ci/stripped_notebooks_check.sh
+        run: .ci/stripped_notebooks_check.sh
 
       - name: isort
-        run: sh .ci/isort.sh
+        run: .ci/isort.sh
 
       - name: Flake8
-        run: sh .ci/flake8.sh
+        run: .ci/flake8.sh
 
       - name: Black
         run: |
