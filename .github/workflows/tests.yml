@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   build:
-    name: Example test
+    name: Build
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -23,8 +23,12 @@ jobs:
       run: pip install cookiecutter
     - name: Build project
       run: cookiecutter . -o project_black --no-input use_black=true  # TODO build multiple projects at once?
-    - name: Example test
+
+  example_test:
+    name: Example test
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
       run: |
         cd project_black/project
-        ls -la .ci
         sh .ci/test.sh
