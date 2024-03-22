@@ -10,16 +10,8 @@ permissions:
   contents: read
 
 jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/workflows/tests-build-action
-
   default:
     name: Test default config
-    needs: [build]
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -69,13 +61,13 @@ jobs:
 
   poetry:
     name: Test config with poetry and black
-    needs: [build]
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./project_poetry/project
     steps:
       - uses: actions/checkout@v4
+      - uses: ./.github/workflows/tests-build-action
       - name: Install poetry
         run: pip install poetry
 
