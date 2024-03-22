@@ -4,11 +4,11 @@ description: Restore cached Python files and built projects
 runs:
   using: "composite"
   steps:
-    - name: Restore Python
-      uses: actions/cache@v3
-      with:
-        path: ${{ env.pythonLocation }}
-        key: cache-${{ github.event.number }}
+#    - name: Restore Python
+#      uses: actions/cache@v3
+#      with:
+#        path: ${{ env.pythonLocation }}
+#        key: cache-${{ github.event.number }}
     - name: Restore projects
       uses: actions/cache@v3
       with:
@@ -17,3 +17,7 @@ runs:
           project_black
           project_poetry
         key: cache-${{ github.sha }}
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
