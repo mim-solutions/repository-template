@@ -18,6 +18,12 @@ jobs:
     - uses: ./.github/workflows/tests-build-action
     - run: cd project_default/project
 
+    - name: debug
+      run: |
+        ls -la .ci
+        chmod +x .ci/*
+        ls -la .ci
+
     - name: Test
       run: sh .ci/test.sh
 
