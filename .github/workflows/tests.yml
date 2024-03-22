@@ -25,9 +25,6 @@ jobs:
       run:
         working-directory: ./project_default/project
     steps:
-    - uses: actions/checkout@v4
-    - uses: ./.github/workflows/setup-test-job
-
     - name: Basic tests
       uses: ./.github/workflows/basic-tests
 

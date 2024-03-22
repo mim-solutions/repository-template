@@ -4,6 +4,9 @@ description: Tests including running unit tests, stripped notebooks check, isort
 runs:
   using: "composite"
   steps:
+    - uses: actions/checkout@v4
+    - uses: ./.github/workflows/setup-test-job
+
     - name: Test
       run: .ci/test.sh
       shell: bash
