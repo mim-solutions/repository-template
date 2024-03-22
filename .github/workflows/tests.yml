@@ -25,8 +25,12 @@ jobs:
       run:
         working-directory: ./project_default/project
     steps:
+    - uses: actions/checkout@v4
+
     - name: Basic tests
       uses: ./.github/workflows/basic-tests
+      with:
+        working-directory: ./project_default/project
 
   black:
     name: Test config with black
@@ -41,6 +45,8 @@ jobs:
 
       - name: Basic tests
         uses: ./.github/workflows/basic-tests
+        with:
+          working-directory: ./project_default/project
 
       - name: Black
         run: |
@@ -62,6 +68,8 @@ jobs:
 
       - name: Basic tests
         uses: ./.github/workflows/basic-tests
+        with:
+          working-directory: ./project_default/project
 
       - name: Black
         run: |
