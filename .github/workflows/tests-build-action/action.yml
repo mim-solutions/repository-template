@@ -1,5 +1,5 @@
 name: Tests Build
-description: Setup Python and install cookicutter
+description: Setup Python and install cookiecutter
 
 runs:
   using: "composite"
