@@ -29,6 +29,7 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     steps:
+    - name: Example test
       run: |
         cd project_black/project
         sh .ci/test.sh
