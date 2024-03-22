@@ -1,4 +1,5 @@
 name: Tests Build
+description: Setup Python and install cookicutter
 
 runs:
   using: "composite"
@@ -9,3 +10,4 @@ runs:
       python-version: "3.10"
   - name: Install cookiecutter
     run: pip install cookiecutter
+    shell: bash
