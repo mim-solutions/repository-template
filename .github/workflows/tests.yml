@@ -10,25 +10,14 @@ permissions:
   contents: read
 
 jobs:
-  build:
-    name: Build
+  test:
+    name: Example test
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.10"
-    - name: Install dependencies
-      run: pip install cookiecutter
+    - uses: mim-solutions/repository-template@v1
     - name: Build project
       run: cookiecutter . -o project_black --no-input use_black=true  # TODO build multiple projects at once?
-
-  example_test:
-    name: Example test
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
     - name: Example test
       run: |
         cd project_black/project
