@@ -1,10 +1,12 @@
 [tool.poetry]
-name = "{{ cookiecutter.project_slug }}"
+name = "{{ cookiecutter.repo_name }}"
 version = "0.1.0"
+packages = [{include = "{{ cookiecutter.package_name }}"}]
 description = ""
 authors = []
 readme = "README.md"
-packages = [{include = "{{ cookiecutter.package_name }}"}]
+license = "MIT"
+repository = "https://github.com/mim-solutions/{{ cookiecutter.repo_name }}"
 
 [tool.poetry.dependencies]
 python = "^{{ cookiecutter.python_version }}"
