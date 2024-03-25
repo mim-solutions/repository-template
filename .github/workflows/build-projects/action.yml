@@ -1,0 +1,32 @@
+name: Build projects
+description: Build and cache projects for other jobs
+
+runs:
+  using: "composite"
+  steps:
+  - name: Setup Python
+    uses: actions/setup-python@v5
+    with:
+      python-version: "3.10"
+  - name: Install cookiecutter
+    run: pip install cookiecutter
+    shell: bash
+
+  - name: Build `project_default`
+    run: cookiecutter . -o project_default --no-input
+    shell: bash
+  - name: Build `project_black`
+    run: cookiecutter . -o project_black --no-input use_black=true
+    shell: bash
+  - name: Build `project_poetry`
+    run: cookiecutter . -o project_poetry --no-input use_poetry=true use_black=true
+    shell: bash
+
+  - name: Cache projects
+    uses: actions/cache@v3
+    with:
+      path: |
+        project_default
+        project_black
+        project_poetry
+      key: cache-${{ github.sha }}

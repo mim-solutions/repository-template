@@ -1,0 +1,99 @@
+name: Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main"]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/workflows/build-projects
+
+  default:
+    name: Test default config
+    needs: [build]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./project_default/project
+    steps:
+    - uses: actions/checkout@v4
+    - uses: ./.github/workflows/setup-test-job
+
+    - name: Test
+      run: .ci/test.sh
+
+    - name: Stripped notebooks check
+      run: .ci/stripped_notebooks_check.sh
+
+    - name: isort
+      run: .ci/isort.sh
+
+    - name: Flake8
+      run: .ci/flake8.sh
+
+  black:
+    name: Test config with black
+    needs: [build]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./project_black/project
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/workflows/setup-test-job
+
+      - name: Test
+        run: .ci/test.sh
+
+      - name: Stripped notebooks check
+        run: .ci/stripped_notebooks_check.sh
+
+      - name: isort
+        run: .ci/isort.sh
+
+      - name: Flake8
+        run: .ci/flake8.sh
+
+      - name: Black
+        run: |
+          pip install black
+          black .
+
+  poetry:
+    name: Test config with poetry and black
+    needs: [build]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./project_poetry/project
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/workflows/setup-test-job
+      - name: Install poetry
+        run: pip install poetry
+
+      - name: Test
+        run: .ci/test.sh
+
+      - name: Stripped notebooks check
+        run: .ci/stripped_notebooks_check.sh
+
+      - name: isort
+        run: .ci/isort.sh
+
+      - name: Flake8
+        run: .ci/flake8.sh
+
+      - name: Black
+        run: |
+          poetry install --only lint
+          poetry run black .

@@ -1,0 +1,19 @@
+name: Setup test job
+description: Restore cached built projects and setup Python
+
+runs:
+  using: "composite"
+  steps:
+    - name: Restore projects
+      uses: actions/cache@v3
+      with:
+        path: |
+          project_default
+          project_black
+          project_poetry
+        key: cache-${{ github.sha }}
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
