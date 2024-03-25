@@ -1,6 +1,6 @@
 name: Cache cleanup
-description: Cleans branch cache when PR is being closed (up to 100 caches)
 # From https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#force-deleting-cache-entries
+# Cleans branch cache when PR is being closed (up to 100 caches).
 # Additionally, GitHub will remove any cache entries that have not been accessed in over 7 days.
 
 on:
