@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "{{ cookiecutter.repo_name }}"
+name = "{{ cookiecutter.package_name }}"
 version = "0.1.0"
 packages = [{include = "{{ cookiecutter.package_name }}"}]
 description = ""
