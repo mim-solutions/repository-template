@@ -1,10 +1,17 @@
 [tool.poetry]
-name = "{{ cookiecutter.project_slug }}"
+name = "{{ cookiecutter.package_name }}"
 version = "0.1.0"
+packages = [{include = "{{ cookiecutter.package_name }}"}]
 description = ""
 authors = []
 readme = "README.md"
-packages = [{include = "lib"}]
+license = "MIT"
+repository = "https://github.com/mim-solutions/{{ cookiecutter.repo_name }}"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
 
 [tool.poetry.dependencies]
 python = "^{{ cookiecutter.python_version }}"
@@ -41,7 +48,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.isort]
 combine_as_imports = true
 profile = "black"
-known_first_party = ["lib", "tests"]
+known_first_party = ["{{ cookiecutter.package_name }}", "tests"]
 skip = [
     ".git",
     ".vscode",
@@ -58,7 +65,7 @@ skip = [
 [tool.pytest.ini_options]
 addopts = "--doctest-modules"
 testpaths = [
-    "lib",
+    "{{ cookiecutter.package_name }}",
     "tests",
 ]
 

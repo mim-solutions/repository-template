@@ -2,6 +2,10 @@
 
 ## Project goal
 
+## Installation
+
+## Usage
+
 ## Development
 
 Remember to use a separate environment for each project.
@@ -66,9 +70,3 @@ You can run black to format code (including notebooks):
 black .
 ```
 {%- endif %}
-
-## Data
-
-## Secrets
-
-## Experiments

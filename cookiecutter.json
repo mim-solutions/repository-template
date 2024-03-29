@@ -1,6 +1,7 @@
 {
   "project_name": "Project",
-  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
+  "repo_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
+  "package_name": "{{ cookiecutter.repo_name }}",
   "python_version": "3.10",
   "use_poetry": false,
   "use_black": false
