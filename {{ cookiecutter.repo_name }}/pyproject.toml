@@ -46,6 +46,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.isort]
+line_length = 120
 combine_as_imports = true
 profile = "black"
 known_first_party = ["{{ cookiecutter.package_name }}", "tests"]
