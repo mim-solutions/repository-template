@@ -27,17 +27,24 @@ def process(git: Path, ipynb_path: Path, stripped_path: Path, no_index: bool):
     with ipynb_path.open(encoding='utf-8') as f_in:
         data = json.load(f_in)
     stripped_path.parent.mkdir(parents=True, exist_ok=True)
-    with stripped_path.open('w', encoding='utf-8') as f_out:
+    with stripped_path.open('w') as f_out:
         for cell in data['cells']:
             cell_type = cell['cell_type']
             source = cell['source']
+            source_lines: list[str]
+            if isinstance(source, str):
+                source_lines = source.splitlines(keepends=True)
+            elif isinstance(source, list):
+                source_lines = source
+            else:
+                raise ValueError('Source type', type(source))
             if cell_type in ('markdown', 'raw'):
                 print('"""', file=f_out)
-                for line in source:
+                for line in source_lines:
                     print(line.rstrip('\n'), file=f_out)
                 print('"""', file=f_out)
             elif cell_type == 'code':
-                for line in source:
+                for line in source_lines:
                     print(line.rstrip('\n'), file=f_out)
                 print('# ---', file=f_out)
             else:
